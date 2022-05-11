@@ -32,5 +32,11 @@
     <ClInclude Include="Renderer.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Type.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

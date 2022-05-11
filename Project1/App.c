@@ -10,6 +10,8 @@
 #include <stdlib.h>
 #include <windows.h>
 #include "Renderer.h"
+//#include "Timer"
+#include "Input.h"
 
 bool App_Init(void)
 {
@@ -22,16 +24,21 @@ bool App_Init(void)
 
 void processInput(void)
 {
-
+	Input_Update();
 }
 
-void update(void)
-{
 
+
+void update(void) 
+{
+	
 }
 
-void render(void)
+void render(void) //랜더하는 것 
 {
+	
+
+	Renderer_DrawText(str, strlen(str));
 	//system("cls");
 	//puts("hh"); //이렇게 하면 썼다 지웠다 해서 깜박거림이 발생한다.
 	//Sleep(10);

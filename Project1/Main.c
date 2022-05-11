@@ -2,6 +2,8 @@
 #include "App.h"
 int main(void)
 {
+	system("color 35");
+
 	// 1. 프로그램 초기화
 	if (false == App_Init())
 	{
