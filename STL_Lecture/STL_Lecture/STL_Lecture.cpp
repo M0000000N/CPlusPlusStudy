@@ -5,69 +5,70 @@
 
 using namespace std;
 
+typedef struct _Print
+{
+	string name[5] = { "Name", "김재성", "용준헌", "김재민", "문수진" };
+	string age[5] = { "Age", "31", "28", "25", "25" };
+	int size = 12;
+}Print;
+
 std::string StringProgram()
 {
-    struct student
-    {
-        string name[5] = { "Name", "김재성", "용준헌", "김재민", "문수진"};
-        string age[5] = { "Age", "31", "28", "25", "문수진"};
-    };
-    student student;
+	Print print;
 
-    int size = 12;
-    // cout으로 출력
-   /* cout << setfill('-') << setw(size * 2 + 3) << "\n";
-    cout << "|" << setfill(' ') << setw(size) << left  << student.name[0] << "|" << setfill(' ') << setw(size) << right << student.age[0] << "|" << "\n";
-    cout << setfill('-') << setw(size * 2 + 3) << "\n";
-    for (int i = 1; i < 5; i++)
-    {
-        cout << "|" << setfill(' ') << setw(size) << left << student.name[i] << "|" << setfill(' ') << setw(size) << right << student.age[i] << "|" << "\n";
-    }
-    std::cout << std::setfill('-') << std::setw(size * 2 + 3) << "\n";*/
+	stringstream A;
 
+	A << setfill('-') << setw(print.size * 2 + 4) << "\n";
+	A << "|" << setfill(' ') << setw(print.size) << left << print.name[0] << "|"
+							 << setw(print.size) << right << print.age[0] << "|" << "\n";
+	A << setfill('-') << setw(print.size * 2 + 4) << "\n";
 
-    stringstream A;
+	for (int i = 1; i < 5; i++)
+	{
+		A << "|" << setfill(' ') << setw(print.size) << left << print.name[i] << "|"
+								 << setw(print.size) << right << print.age[i] << "|" << "\n";
+	}
 
-    A << setfill('-') << setw(size * 2 + 4) << "\n";
-    A << "|" << setfill(' ') << setw(size)  << left << student.name[0] << "|" << setw(size) << right << student.age[0] << "|" << "\n";
-    A << setfill('-') << setw(size * 2 + 4) << "\n";
-    for (int i = 1; i < 5; i++)
-    {
-        A << "|" << setfill(' ') << setw(size) << left << student.name[i] << "|" << setw(size) << right << student.age[i] << "|" << "\n";
-    }
-    A << setfill('-') << setw(size * 2 + 4) << "\n";
+	A << setfill('-') << setw(print.size * 2 + 4) << "\n";
 
-
-
-    return A.str();
+	return A.str();
 }
 
 int main()
 {
-    //ofstream of("temp.txt");
-    //of << StringProgram();
-    ////cout << StringProgram();
+	Print print;
 
-    struct student
-    {
-        string name[5] = { "Name", "김재성", "용준헌", "김재민", "문수진" };
-        string age[5] = { "Age", "31", "28", "25", "25" };
-    };
-    student student;
+	ofstream of("temp.txt");
+	of << StringProgram();
 
-    int size = 12;
+	// cout으로 출력
+	cout << "cout으로 출력한 버전\n";
+	cout << setfill('-') << setw(print.size * 2 + 3) << "\n";
+	cout << "|" << setfill(' ') << setw(print.size) << left << print.name[0]
+		 << "|" << setfill(' ') << setw(print.size) << right << print.age[0] << "|" << "\n";
+	cout << setfill('-') << setw(print.size * 2 + 3) << "\n";
 
+	for (int i = 1; i < 5; i++)
+	{
+		cout << "|" << setfill(' ') << setw(print.size) << left << print.name[i]
+			 << "|" << setfill(' ') << setw(print.size) << right << print.age[i] << "|" << "\n";
+	}
 
-    // printf로 출력
-    printf("%028c\n", ' ');
-    printf("0%-12s0%12s0\n", student.name[0].c_str(), student.age[0].c_str());
-    printf("%028c\n", ' ');
-    for (int i = 1; i < 5; i++)
-    {
-        printf("0%-12s0%12s0\n", student.name[i].c_str(), student.age[i].c_str());
-    }
-    printf("%028c\n", ' ');
+	std::cout << std::setfill('-') << std::setw(print.size * 2 + 3) << "\n";
 
-    return 0;
+	// printf로 출력
+	printf("\nprintf()으로 출력한 버전\n");
+	printf("---------------------------\n");
+	printf("|%-12s|%12s|\n", print.name[0].c_str(), print.age[0].c_str());
+	printf("---------------------------\n");
+
+	for (int i = 1; i < 5; i++)
+	{
+		printf("|%-12s|%12s|\n", print.name[i].c_str(), print.age[i].c_str());
+	}
+
+	printf("---------------------------\n");
+
+	return 0;
 }
 

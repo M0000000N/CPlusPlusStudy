@@ -1,104 +1,87 @@
 ﻿#include <string>
 #include <vector>
 #include <iostream>
+#include <assert.h>
 
 using namespace std;
 
-vector<int> solution(vector<int> answers) {
-    vector<int> answer;
-    
-    int mathLoser1[10000];
-    int mathLoser2[10000];
-    int mathLoser3[10000];
+#pragma region selfnumber
+//int main()
+//{
+//    int n ;
+//    int count=0;
+//    bool isSelfNumber[100000];
+//    int selfNumber[100000];
+//
+// //   while (n != 0)
+// //   {
+// //       n /= 10;
+// //       count++;
+// //   }
+// //   cout << n << endl;
+// //   cout << count << endl;
+//
+//	////	// n이 1의 자리수일 떄 셀프넘버
+// //   while (count = 1)
+// //   {
+//
+// //   }
+//		for (int n = 1; n <= 10000; n++)
+//		{
+//            //int n = 1;
+//			isSelfNumber[n] = true;
+//			isSelfNumber[n + n / 10 + n % 10] = false;
+//            //n++;
+//		}
+//
+//        for (int i = 1; i <= 10000; i++)
+//        {
+//            int n = 1;
+//			if (isSelfNumber[n])
+//			{
+//                cout << n;
+//			}
+//            n++;
+//        }
+//
+//    // n이 1000의 자리수일 때 셀프넘버
+//    //n % 10;
+//
+//    // n이 100의 자리수일 떄 셀프넘버
+//
+//    // n이 10의 자리수일 때 셀프넘버
+//	//if (n % 10 == n * 1)
+//	//	if (n % 10 == n)
+//
+//
+//    return 0;
+//}
+#pragma endregion
 
-    int value1 = 1;
-    for (int i = 0; i < 10000; i++)     // 1번 수포자가 찍는 방식
-    {
-        mathLoser1[i] = value1;
-        value1++;
-        if (value1 > 5)
-            value1 = 1;
-    }
-    
-    int value2 = 1;
-    for (int i = 0; i < 10000; i++)     // 2번 수포자가 찍는 방식
-    {
-        if (i % 2 == 0) // 0,2,4,8...번째 문제는 2번
-        {
-            mathLoser2[i] = 2;
-        }
-        else
-        {
-            if (value2 == 2) // 1, 3, 4, 5 반복
-                value2++;
+#pragma region 손익분기점
 
-            else if (value2 > 5) // 5이상이면 
-                value2 = 1;
+int main()
+{
+	int A;
+	int B;
+	int C;
+	cin >> A >> B >> C;
+	int count = 0;
+	int income = C * count;
+	int cost = A + B * count;
 
-            mathLoser2[i] = value2;
-            value2++;
-        }
-    }
-
-    int value3 = 3;                     // 3번 수포자가 찍는 방식
-    mathLoser3[0] = 3;
-    mathLoser3[1] = 3;
-    for (int i = 2; i < 10000; i++)
-    {
-        if (i % 10 == 0)
-        {
-            mathLoser3[i] = 3;
-            mathLoser3[i + 1] = 3;
-            i++;
-        }
-        else
-        {
-            if (value3 == 3)
-                value3 = 1;
-            if (value3 > 5)
-                value3 = 1;
-            mathLoser3[i] = value3;
-            mathLoser3[i+1] = value3;
-            i++;
-            value3++;
-            if (value3 == 3)
-                value3++;
-        }
-    }
-
-    int count1 = 0;
-    int count2 = 0;
-    int count3 = 0;
-
-	for (int i = 0; i < answers.size(); i++)
+	while (income <= cost)
 	{
-		if (*(answers.begin() + i) == mathLoser1[i])
-		{
-			count1++;
-		}
-		if (*(answers.begin() + i) == mathLoser2[i])
-		{
-			count2++;
-		}
-		if (*(answers.begin() + i) == mathLoser3[i])
-		{
-			count3++;
-		}
+		income = C * count;
+		cost = A + B * count;
+		count++;
 	}
-
-    if (count1 >= count2 && count1 >= count3)
-    {
-        answer.push_back(1);
-    }
-    if (count2 >= count1 && count2 >= count3)
-    {
-        answer.push_back(2);
-    }
-    if (count3 >= count2 && count3 >= count1)
-    {
-        answer.push_back(3);
-    }
-    
-    return answer;
-
+	if (count == 0)
+	{
+		cout << "-1";
+	}
+	else
+	cout << income;
 }
+
+#pragma endregion
