@@ -5,7 +5,6 @@
 
 using namespace std;
 
-<<<<<<< Updated upstream
 #pragma region selfnumber
 //int main()
 //{
@@ -60,133 +59,166 @@ using namespace std;
 #pragma endregion
 
 #pragma region 손익분기점
+//int main()
+//{
+//	int A;
+//	int B;
+//	int C;
+//	cin >> A >> B >> C;
+//	int count = 0;
+//	int income = C * count;
+//	int cost = A + B * count;
+//
+//	while (income <= cost)
+//	{
+//		income = C * count;
+//		cost = A + B * count;
+//		count++;
+//	}
+//	if (count == 0)
+//	{
+//		cout << "-1";
+//	}
+//	else
+//	cout << income;
+//}
+#pragma endregion
+
+#pragma region 에디터_연결리스트시도
+#include <forward_list>
+class ForwardList
+{
+	struct Node             // 노드는 외부에 공개하지 않는다. 
+	{
+		Node(int data = 0, Node* next = nullptr);
+		Node(const Node&) = delete;
+		Node& operator=(const Node&) = delete;
+		~Node();
+
+		int     Data = 0;       // 실제 데이터
+		Node* Next = nullptr;   // 다음 원소
+	};
+
+	class const_iterator    // 데이터를 수정할 수 없는 반복자. const int*같은 것
+	{
+	public:
+		const_iterator(Node* p = nullptr);
+		~const_iterator();
+
+		const int& operator*() const;       // 역참조
+		const int* operator->() const;      // 멤버접근
+		const_iterator& operator++();       // 전위 증가 연산자
+		const_iterator  operator++(int);    // 후위 증가 연산자
+		bool            operator==(const const_iterator& rhs) const;
+		bool            operator!=(const const_iterator& rhs) const;
+		bool            operator==(nullptr_t p) const;
+		bool            operator!=(nullptr_t p) const;
+
+	public:
+		Node* _p = nullptr;
+	};
+
+	// 데이터 수정이 가능한 반복자
+	class iterator : public const_iterator
+	{
+	public:
+		// using const_iterator::const_iterator;
+		iterator(Node* p = nullptr);
+
+		int& operator*() const;
+		int* operator->() const;
+		iterator& operator++();
+		iterator        operator++(int);
+	};
+
+public:
+private:
+	// 더미노드 : 실제 데이터를 담지 않음, 오로지 구현의 편의성을 위해 존재.
+	Node* _head = new Node();   // before_begin()
+	Node* _end = new Node();    // end()
+
+};
 
 int main()
 {
-	int A;
-	int B;
-	int C;
-	cin >> A >> B >> C;
-	int count = 0;
-	int income = C * count;
-	int cost = A + B * count;
+	std::forward_list<int> flist;
+	std::forward_list<int>::iterator iter;
+	//ForwardList::const_iterator pos;
 
-	while (income <= cost)
+	int sizeOfChar; // 문자열의 길이
+	cin >> sizeOfChar;
+	int stateCount;	// 입력할 명령어의 개수
+	cin >> stateCount;
+	char statement = '0';
+
+	string str = "";
+	cin >> str;
+	//cin.get();
+
+	for (int i = str.size()-1; i >= 0; i--)
 	{
-		income = C * count;
-		cost = A + B * count;
-		count++;
+		flist.insert_after(flist.before_begin(), str[i]);
 	}
-	if (count == 0)
+
+	while (stateCount)
 	{
-		cout << "-1";
+		//str[iter];
+		switch (statement)
+		{
+		case 'L':
+		{
+			if (iter == flist.begin())
+			{
+				break;
+			}
+			else
+			{
+				//iter = iter.operator->();
+			}
+		}
+		case 'D':
+		{
+			if (iter == flist.end())
+			{
+				break;
+			}
+			else
+			{
+				iter = iter.operator++();
+			}
+		}
+		case 'B':
+		{
+			if (iter == flist.begin())
+			{
+				break;
+			}
+			else
+			{
+				flist.erase_after(iter);
+			}
+		}
+		case 'P':
+		{
+			char state_char;
+			cin >> state_char;
+
+			if (iter == flist.begin())
+			{
+				break;
+			}
+			else
+			{
+			}
+		}
+		stateCount--;
+		}
+
 	}
-	else
-	cout << income;
 }
+#pragma endregion
+
+#pragma region
+
 
 #pragma endregion
-=======
-vector<int> solution(vector<int> answers)
-{
-    // 수포자가 찍는 방식을 담은 배열
-    int* mathLoser1 = (int*)malloc((sizeof(int)) * answers.size());
-    int* mathLoser2 = (int*)malloc((sizeof(int)) * answers.size());
-    int* mathLoser3 = (int*)malloc((sizeof(int)) * answers.size());
-
-    // 1번 수포자가 찍는 방식 : 1,2,3,4,5,1,2,3,4,5,...
-    int value1 = 1;
-    for (int i = 0; i < answers.size(); i++)
-    {
-        mathLoser1[i] = value1; // 12345순으로 배열에 담는다.
-        value1++;
-        if (value1 > 5)         // 값이 5이상이면 값은 1
-            value1 = 1;
-    }
-
-    // 2번 수포자가 찍는 방식 : 2,1,2,3,2,4,2,5,2,1,2,3,2,4,2,5,...
-    int value2 = 1;
-    for (int i = 0; i < answers.size(); i++)
-    {
-        if (i % 2 == 0) // 0,2,4,8...번째는 2번을 찍는다.
-        {
-            mathLoser2[i] = 2;
-        }
-        else                        // 1, 3, 4, 5 반복
-        {
-            if (value2 == 2)        // 값이 2면 값은 3
-                value2++;
-
-            else if (value2 > 5)    // 값이 5이상이면 값은 1
-                value2 = 1;
-
-            mathLoser2[i] = value2; // 위 알고리즘을 거친 값을 현재 배열에 담는다.
-            value2++;               // 값은 1씩 증가
-        }
-    }
-
-    // 3번 수포자가 찍는 방식 3,3,1,1,2,2,4,4,5,5,3,3,1,1,2,2,4,4,5,5, ...
-    int value3 = 3;
-    for (int i = 0; i < answers.size(); i++)
-    {
-        if (i % 10 == 0)            // 10번째 마다 현재 값과 다음 값은 3,3
-        {
-            mathLoser3[i] = 3;
-            mathLoser3[i + 1] = 3;
-            i++;
-        }
-        else
-        {
-            if (value3 == 3)        // 값이 3이면 값은 1
-                value3 = 1;
-            if (value3 > 5)         // 값이 5 이상이면 값은 1
-                value3 = 1;
-            mathLoser3[i] = value3; // 위 알고리즘을 거친 값을 현재와 다음 배열에 넣는다.
-            mathLoser3[i + 1] = value3;
-            i++;                    // 다음 순서
-            value3++;               // 값도 증가
-            if (value3 == 3)        // 증가된 값이 3이면 값은 4 
-                value3++;
-        }
-    }
-
-    // 수포자들이 맞힌 개수
-    int correctCount1 = 0;
-    int correctCount2 = 0;
-    int correctCount3 = 0;
-
-    // 0부터 입력된 정답크기만큼 순회해서 수포자의 정답개수를 추가한다.
-    for (int i = 0; i < answers.size(); i++)
-    {
-        if (*(answers.begin() + i) == mathLoser1[i])
-        {
-            correctCount1++;
-        }
-        if (*(answers.begin() + i) == mathLoser2[i])
-        {
-            correctCount2++;
-        }
-        if (*(answers.begin() + i) == mathLoser3[i])
-        {
-            correctCount3++;
-        }
-    }
-
-    vector<int> answer; // 많은 문제를 맞힌 사람을 담는 객체
-    // 가장 높은 점수를 받은 사람 return
-    if (correctCount1 >= correctCount2 && correctCount1 >= correctCount3)   // 1번 수포자가 많이 맞췄을 때
-    {
-        answer.push_back(1);
-    }
-    if (correctCount2 >= correctCount1 && correctCount2 >= correctCount3)   // 2번 수포자가 많이 맞췄을 때
-    {
-        answer.push_back(2);
-    }
-    if (correctCount3 >= correctCount2 && correctCount3 >= correctCount1)   // 3번 수포자가 많이 맞췄을 때
-    {
-        answer.push_back(3);
-    }
-
-    return answer;
-}
->>>>>>> Stashed changes
