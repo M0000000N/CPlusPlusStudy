@@ -18,5 +18,17 @@
     <ClCompile Include="solution.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="제로.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="괄호.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="균형잡힌세상.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="스택수열.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

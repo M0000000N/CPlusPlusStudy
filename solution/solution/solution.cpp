@@ -85,140 +85,152 @@ using namespace std;
 #pragma endregion
 
 #pragma region 에디터_연결리스트시도
-#include <forward_list>
-class ForwardList
-{
-	struct Node             // 노드는 외부에 공개하지 않는다. 
-	{
-		Node(int data = 0, Node* next = nullptr);
-		Node(const Node&) = delete;
-		Node& operator=(const Node&) = delete;
-		~Node();
-
-		int     Data = 0;       // 실제 데이터
-		Node* Next = nullptr;   // 다음 원소
-	};
-
-	class const_iterator    // 데이터를 수정할 수 없는 반복자. const int*같은 것
-	{
-	public:
-		const_iterator(Node* p = nullptr);
-		~const_iterator();
-
-		const int& operator*() const;       // 역참조
-		const int* operator->() const;      // 멤버접근
-		const_iterator& operator++();       // 전위 증가 연산자
-		const_iterator  operator++(int);    // 후위 증가 연산자
-		bool            operator==(const const_iterator& rhs) const;
-		bool            operator!=(const const_iterator& rhs) const;
-		bool            operator==(nullptr_t p) const;
-		bool            operator!=(nullptr_t p) const;
-
-	public:
-		Node* _p = nullptr;
-	};
-
-	// 데이터 수정이 가능한 반복자
-	class iterator : public const_iterator
-	{
-	public:
-		// using const_iterator::const_iterator;
-		iterator(Node* p = nullptr);
-
-		int& operator*() const;
-		int* operator->() const;
-		iterator& operator++();
-		iterator        operator++(int);
-	};
-
-public:
-private:
-	// 더미노드 : 실제 데이터를 담지 않음, 오로지 구현의 편의성을 위해 존재.
-	Node* _head = new Node();   // before_begin()
-	Node* _end = new Node();    // end()
-
-};
-
-int main()
-{
-	std::forward_list<int> flist;
-	std::forward_list<int>::iterator iter;
-	//ForwardList::const_iterator pos;
-
-	int sizeOfChar; // 문자열의 길이
-	cin >> sizeOfChar;
-	int stateCount;	// 입력할 명령어의 개수
-	cin >> stateCount;
-	char statement = '0';
-
-	string str = "";
-	cin >> str;
-	//cin.get();
-
-	for (int i = str.size()-1; i >= 0; i--)
-	{
-		flist.insert_after(flist.before_begin(), str[i]);
-	}
-
-	while (stateCount)
-	{
-		//str[iter];
-		switch (statement)
-		{
-		case 'L':
-		{
-			if (iter == flist.begin())
-			{
-				break;
-			}
-			else
-			{
-				//iter = iter.operator->();
-			}
-		}
-		case 'D':
-		{
-			if (iter == flist.end())
-			{
-				break;
-			}
-			else
-			{
-				iter = iter.operator++();
-			}
-		}
-		case 'B':
-		{
-			if (iter == flist.begin())
-			{
-				break;
-			}
-			else
-			{
-				flist.erase_after(iter);
-			}
-		}
-		case 'P':
-		{
-			char state_char;
-			cin >> state_char;
-
-			if (iter == flist.begin())
-			{
-				break;
-			}
-			else
-			{
-			}
-		}
-		stateCount--;
-		}
-
-	}
-}
+//#include <list>
+//int main()
+//{
+//	string s = ""; // 문자열을 입력받는다.
+//	cout << "문자열을 입력하세요 : ";
+//	cin >> s;
+//
+//	int M;	// 명령어의 개수를 입력받는다.
+//	cout << "명령어의 개수를 입력하세요 : ";
+//	cin >> M;
+//
+//	// 명령어를 처리한다.
+//	list<char> lst(s.begin(), s.end());
+//	list<char>::iterator cursor = lst.end();
+//
+//	while (M--)
+//	{
+//		// 명령어를 입력받는다. 
+//		char op;
+//		cin >> op;
+//
+//		switch (op)
+//		{
+//		case 'L':
+//		{
+//			if (cursor != lst.begin())
+//				--cursor;
+//			break;
+//		}
+//		case 'D':
+//		{
+//			if (cursor != lst.end())
+//				++cursor;
+//			break;
+//		}
+//		case 'B':
+//		{
+//			// 문자를 지운 후 커서 위치 업데이트 필요함.
+//			if (cursor != lst.begin())
+//			{
+//				--cursor;
+//				cursor = lst.erase(cursor);
+//			}
+//		}
+//		case 'P':
+//		{
+//			char param;
+//			cin >> param;
+//			// 문자를 추가하기 전에 위치를 업데이트 해줘야함.
+//			cursor = lst.insert(cursor, param);
+//			cursor++;
+//			break;
+//		}
+//	}
+//
+//	// 출력한다.
+//		for (list<char>::iterator iter = lst.begin(); iter != lst.end(); ++iter)
+//		{
+//			cout << *iter;
+//		}
+//}
 #pragma endregion
 
-#pragma region
+#pragma region 키로거
+//int main()
+//{
+//	//
+//	ios_base::sync_with_stdio(false);
+//	cin.tie(nullptr);
+//	cout.tie(nullptr);
+//
+//	int testCase;
+//	cin >> testCase;
+//	while (testCase--)
+//	{
+//		//1. 문자열을 입력받는다.
+//		string input;
+//		cin >> input;
+//
+//		// 2. 컨테이너 2개를 만든다. (커서 왼편에 존재하는 문자열(정방향으로 저장), 커서 오른편에 존재하는 문자열로 역방향저장)
+//		vector(char>
+//		
+//	}
+//}
+#pragma endregion
 
+#pragma region 키로거
+#include <stack>
+int main()
+{	
+	// 정수를 저장하는 스택
+	stack<int> stack;
+	
+	// 명령의 수 N
+	int N = 0;
+	cin >> N;
+
+	// 정수 X를 스택에 넣을 것
+	int X;
+
+	while (N--)
+	{
+		// 명령이 하나씩 주어짐
+		string order = "";
+		cin >> order;
+
+		if (order == "push")
+		{
+			cin >> X;
+			stack.push(X);
+		}
+		if (order == "pop")
+		{
+			if (stack.empty())
+			{
+				cout << "-1\n";
+			}
+			else
+			{
+				cout << stack.top() << "\n";
+				stack.pop();
+			}
+		}
+		if (order == "size")
+		{
+			cout << stack.size() << "\n";
+		}
+		if (order == "empty")
+		{
+			if (stack.empty())
+			{
+				cout << "1" << "\n";
+			}
+			else
+				cout << "0" << "\n";
+		}
+		 if(order == "top")
+		{
+			if (stack.empty())
+			{
+				cout << "-1\n";
+			}
+			else
+			cout << stack.top() << "\n";
+		}
+	}
+}
 
 #pragma endregion
