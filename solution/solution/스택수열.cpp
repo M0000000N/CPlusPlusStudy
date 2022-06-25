@@ -21,8 +21,10 @@ int main()
 
 	int seq = 1;		// 임의의 수열
 	stack<int> seqStack; // 임의의 수열을 담을 스택
-	int inputNum[] = { 0, };// 입력한 수를 담을 배열
+
 	int index = 1;			// 입력한 수를 담을 배열의 인덱스
+
+	int* inputNum = new int[N + 1];
 	inputNum[0] = 0;		// 첫 입력의 비교를 위한 임의의 숫자
 	seqStack.push(0);
 	string print;	//프린트할 것
@@ -37,7 +39,7 @@ int main()
 			if (seqStack.top() == inputNum[index] && !seqStack.empty())
 			{
 				seqStack.pop();
-				print += "- : 이전 입력수보다 작았다.\n";
+				print += "-\n";
 			}
 			else
 			{
@@ -45,6 +47,7 @@ int main()
 				break;
 			}
 		}
+
 		else if (inputNum[index] == 0 || inputNum[index] == inputNum[index - 1])
 		{
 			isTrue = false;
@@ -61,7 +64,7 @@ int main()
 			if (seqStack.top() == inputNum[index] && !seqStack.empty())
 			{
 				seqStack.pop();
-				print += "- : 이전 입력수보다 컸다.\n";
+				print += "-\n";
 			}
 		}
 		index++;
@@ -71,7 +74,7 @@ int main()
 	{
 		cout << print;
 	}
-	else if(!isTrue)
+	else if (!isTrue)
 	{
 		cout << "NO\n";
 	}
