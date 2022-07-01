@@ -21,22 +21,10 @@
     <ClCompile Include="제로.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="괄호.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="균형잡힌세상.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="스택수열.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="오큰수.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="큐2.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="수찾기.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
